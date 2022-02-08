@@ -1,0 +1,33 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-card color="primary">
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>{{ customer.firstName }} {{customer.lastName}} </h3>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{ customer.address }}</p>
+                <p>{{ customer.phone }}</p>
+                <p>{{ customer.email }}</p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <!--Customer data expansion-->
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    This is a title of expansion
+                </mat-expansion-panel-header>
+                <mat-panel-description>
+                    Some description // or other garbage
+                </mat-panel-description>
+                <p>
+                    This is the main content
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-grid-tile>
+</mat-grid-list>

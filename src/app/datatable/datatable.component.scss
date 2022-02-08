@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+        border-color: rgb(168, 168, 168);
+    }
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
+
+.flex-center-content {
+    display:flex;
+    justify-content: center;
+}

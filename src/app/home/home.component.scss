@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+    li {
+        a {
+            display:inline-block;
+            position: relative;
+            top: -5px;   
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
