@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerModel } from './customer.model';
+import { CustomerService } from './customer.service';
 
 @Component({
   selector: 'app-customer',
@@ -8,20 +10,19 @@ import { CustomerModel } from './customer.model';
 })
 export class CustomerComponent implements OnInit {
     public customer: CustomerModel = new CustomerModel()
+    private customerIdFromParams: number
 
-    constructor() { }
+    constructor(private customerService: CustomerService, private route: ActivatedRoute ) { }
 
     ngOnInit(): void {
 
-        this.customer = {
-            id: 1,
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john@doe.com',
-            phone: '123-456-7890',
-            address: '123 Main St.',
-            city: 'Anytown',
-            postcode: '12345',
-        }
+        this.route.params.subscribe(params => {
+            this.customerIdFromParams = +params['id']
+        })
+        this.customerService.getDataById(this.customerIdFromParams).subscribe(data => { 
+            this.customer = data
+        });
+
     }
+
 }

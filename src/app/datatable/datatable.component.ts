@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { CustomerModel } from '../customer/customer.model';
 import { DatatableService } from './datatable.service';
@@ -22,17 +23,13 @@ export class DatatableComponent implements OnInit, AfterViewInit, OnDestroy {
     public clickedRows = new Set<CustomerModel>();
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    constructor(private datatableService: DatatableService) { }
-
-
+    constructor(private datatableService: DatatableService, private router: Router) { }
     ngOnInit(): void {
         this.datatableService.getData().subscribe(data => {
             this.customers = data;
             this.dataSource.data = this.customers;
-            });
-            
+        });
     }
-
     ngAfterViewInit(): void {
         this.dataSource.paginator = this.paginator;
     }
@@ -44,26 +41,13 @@ export class DatatableComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public doFilter = (event: any) => {
-        
-        this.dataSource.filter =event. value.trim().toLocaleLowerCase();
-      }
+        this.dataSource.filter = event.value.trim().toLocaleLowerCase();
+    }
+
+    public clickRowEvent(row: CustomerModel) {
+        console.log(row)
+        this.router.navigate(['/customer', row.id])
+    }
 
 }
 
-
-const CUSTOMER_DATA: CustomerModel[] = [
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'John', lastName: 'Doe', email: 'john@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-    { id: 0, firstName: 'Michael', lastName: 'Lindemans', email: 'michael@doe.com', phone: '+49 123456789', address: 'Street 1', city: 'City 1', postcode: '12345' },
-
-]
