@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required]
     })
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private authService: AuthService) { }
 
    
     ngOnInit(): void {
@@ -22,12 +23,14 @@ export class LoginComponent implements OnInit {
 
     public submit() {
         if (this.form.valid) {
-            this.submitEm.emit(this.form.value)
+            console.log(this.form.value)
+
+            this.authService.auth(this.form.value).subscribe((data) => {
+                console.log(data)
+            })
         }
     }
 
     @Input() error: string | null
-
-    @Output() submitEm = new EventEmitter()
 
 }
