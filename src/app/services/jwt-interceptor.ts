@@ -11,7 +11,7 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-     //   add auth header with jwt if account is logged in and request is to the api url
+     //   add auth header with jwt if jwt token is present in localstorage
         const isLoggedIn = this.token
         if (isLoggedIn) {
             request = request.clone({

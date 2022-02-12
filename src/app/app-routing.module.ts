@@ -11,11 +11,11 @@ import { AuthGuardService as AuthGuard } from './services/authguard.service';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent},
-    { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'customers', component: DatatableComponent, canActivate: [AuthGuard] },
-    { path: 'customer/:id', component: CustomerComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always' },
+    { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always'  },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always'   },
+    { path: 'customers', component: DatatableComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always'   },
+    { path: 'customer/:id', component: CustomerComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always'   },
 ];
 
 @NgModule({

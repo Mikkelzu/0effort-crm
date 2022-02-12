@@ -49,5 +49,9 @@ export class DatatableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate(['/customer', row.id])
     }
 
+    public addNewCustomer()  {
+        // TODO
+    }
+
 }
 
