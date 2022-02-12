@@ -8,9 +8,17 @@ import { FormControl } from '@angular/forms';
 })
 export class AppbarComponent implements OnInit {
 
-    constructor() { }
+    private token: any =  localStorage.getItem('token');
+    public authed: boolean = this.token ? true : false;
+
+    constructor() {
+
+        console.log(this.authed)
+
+    }
 
     ngOnInit(): void {
+
     }
 
 }

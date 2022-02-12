@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,15 +10,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+    private authenticated: boolean = false;
 
     public form = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
     })
 
-    constructor(private fb: FormBuilder, private authService: AuthService) { }
-
-   
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
     ngOnInit(): void {
     }
 
@@ -25,8 +25,16 @@ export class LoginComponent implements OnInit {
         if (this.form.valid) {
             console.log(this.form.value)
 
-            this.authService.auth(this.form.value).subscribe((data) => {
+            this.authService.auth(this.form.value).subscribe((data: any) => {
                 console.log(data)
+
+                if (this.authenticated === false) {
+                    localStorage.setItem('token', data.token);
+                    this.authenticated = true;
+                }
+
+                this.router.navigate(['/dashboard']);
+
             })
         }
     }

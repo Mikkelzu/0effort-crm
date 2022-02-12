@@ -10,7 +10,11 @@ import { CustomerComponent } from './customer/customer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import {  HttpClientModule } from '@angular/common/http';
+import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './services/jwt-interceptor';
+import { AuthGuardService as AuthGuard } from './services/authguard.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +24,8 @@ import {  HttpClientModule } from '@angular/common/http';
         CustomerComponent,
         HomeComponent,
         LoginComponent,
+        DashboardComponent,
+        LogoutComponent,
     ],
     imports: [
         BrowserModule,
@@ -29,7 +35,11 @@ import {  HttpClientModule } from '@angular/common/http';
         ReactiveFormsModule,
         HttpClientModule
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        AuthGuard,
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
+

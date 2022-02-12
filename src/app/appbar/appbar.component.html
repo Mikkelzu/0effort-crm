@@ -6,7 +6,13 @@
             <mat-icon>people</mat-icon>
           </button>
     </a>
-    <a routerLink="/login">
+    <a *ngIf="authed" routerLink="/logout">
+        <button mat-icon-button class="login-icon" aria-label="logout">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </a>
+
+    <a *ngIf="!authed" routerLink="/login">
         <button mat-icon-button class="login-icon" aria-label="login">
             <mat-icon>login</mat-icon>
         </button>
