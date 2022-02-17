@@ -16,18 +16,29 @@
 
     <mat-grid-tile>
         <!--Customer data expansion-->
-        <mat-accordion>
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    This is a title of expansion
-                </mat-expansion-panel-header>
-                <mat-panel-description>
-                    Some description // or other garbage
-                </mat-panel-description>
-                <p>
-                    This is the main content
-                </p>
-            </mat-expansion-panel>
-        </mat-accordion>
+        <mat-card color="primary">
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>Orders</h3>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle *ngFor="let order of customerOrders">
+                        <mat-expansion-panel-header>
+                           Order number:  {{order.id}}
+                        </mat-expansion-panel-header>
+                        <mat-panel-description>
+                           Date: {{order.orderDate | date: 'medium'}}
+                        </mat-panel-description>
+                        <p>
+                            {{order.orderDescription}}
+                        </p>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+
     </mat-grid-tile>
 </mat-grid-list>

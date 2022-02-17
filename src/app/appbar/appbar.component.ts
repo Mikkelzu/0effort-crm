@@ -13,7 +13,7 @@ export class AppbarComponent implements OnInit {
 
     constructor() {
 
-        console.log(this.authed)
+        console.log("is authed " + this.authed)
 
     }
 
